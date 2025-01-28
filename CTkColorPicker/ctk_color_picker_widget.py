@@ -212,7 +212,7 @@ class CTkColorPicker(customtkinter.CTkFrame):
         """
         
         # update the text of the rgb entries
-        [self.rgb_entries[i].configure(textvariable=tkinter.StringVar(value=str(self.rgb_color[i]))) for i in range(3)] 
+        if self.are_rgb_entries_present: [self.rgb_entries[i].configure(textvariable=tkinter.StringVar(value=str(self.rgb_color[i]))) for i in range(3)] # update the text of the rgb entries (only if they are present) 
 
     def on_mouse_drag(self, event) -> None:
         """
@@ -264,7 +264,7 @@ class CTkColorPicker(customtkinter.CTkFrame):
                           int(self.rgb_color[2] * (brightness/255))] # update the rgb color
         
         #update the rgb entries
-        if self.are_rgb_entries_present: [self.rgb_entries[i].configure(textvariable=tkinter.StringVar(value=str(self.rgb_color[i]))) for i in range(3)] # update the text of the rgb entries (only if they are present)
+        self.update_rgb_entries()
 
         self.hex_color = "#{:02x}{:02x}{:02x}".format(*self.rgb_color) # update the hex color
         
